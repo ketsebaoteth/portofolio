@@ -4,23 +4,23 @@
       
       <div class="bento w-full flex flex-col gap-4 h-screen py-8">
         <div class="flex gap-4">
-          <div class="location&socials relative p-4 h-80 min-w-[400px] flex-grow border border-border border-l-0">
+          <div class="location&socials relative p-4 h-80 min-w-[450px] flex-grow border border-border border-l-0">
             <img src="../../assets/loc.png" class="absolute z-0 top-0 left-0 w-full h-full" alt="">
-            
+            <div class="pulse absolute top-1/2 left-1/2 opacity-50 -translate-x-1/2 -translate-y-1/2 size-16 bg-accent-foreground rounded-full">
+
+            </div>
             <div class="px-3 absolute z-20 py-2 w-fit gap-1 flex place-items-center rounded-full bg-accent text-accent-foreground">
               <Icon name="i-tabler:map-pin-filled" class="size-4" />
               <p class="text-xs">Location</p>
             </div>
           </div>
           <div class="latestTweetblogs flex flex-col h-80 flex-grow gap-4">
-            <div class="thexweet p-4 w-full flex flex-col gap-2 flex-grow border border-border">
-              <div class="px-3 z-20 py-2 w-fit gap-1 flex place-items-center rounded-full bg-accent text-accent-foreground">
-                <Icon name="i-tabler:brand-x" class="size-4" />
-              </div>
+            <div class="thexweet p-4 w-full flex flex-col gap-4 flex-grow border border-border">
+              <Icon name="i-tabler:brand-x" class="size-7" />
               <FuncTweet />
             </div>
             
-            <div class="readblog flex place-items-center reactor text-lg mt-auto w-full py-4 border border-border px-4 box-border">
+            <div class="readblog flex place-items-center reactor mt-auto w-full py-4 border border-border px-4 box-border">
               Read Latest Blog's
               <Icon name="i-tabler:arrow-right" class="size-6 ml-auto" />
             </div>
@@ -30,11 +30,11 @@
               <FuncSpot />
             </div>
             <div class="type relative p-4 w-full flex flex-col flex-grow border border-r-0 border-border">
-              <div class="px-3 z-20 py-2 w-fit gap-1 flex place-items-center rounded-full bg-accent text-accent-foreground">
-                <Icon name="i-simple-icons:monkeytype" class="size-4" />
+              <div class="z-20 py-2 w-fit gap-1 flex place-items-center rounded-full">
+                <Icon name="i-simple-icons:monkeytype" class="size-6" />
                 <p class="text-xs">Typing Speed</p>
               </div>
-              <p class="text-[100px] z-20 relative font-semibold leading-[100px] mt-auto -ml-4">120<span class="text-xl font-bold">WPM</span></p>
+              <p class="text-[100px] z-20 relative font-semibold leading-[100px] mt-auto">120<span class="text-xl font-bold">WPM</span></p>
               <div class="details flex gap-2 text-sm">
                 <div class="time flex place-items-center gap-1">
                   <Icon name="i-tabler:clock" class="size-4" />
@@ -52,13 +52,13 @@
         </div>
         <div class="flex gap-4">
           <div class="githubcontrib p-4 h-64 flex-grow border border-border border-l-0">
-            <div class="px-3 z-20 py-2 w-fit gap-1 flex place-items-center rounded-full bg-accent text-accent-foreground">
+            <div class="px-3 z-20 py-2 w-fit gap-2 flex place-items-center rounded-full">
               <Icon name="tabler:brand-github" class="size-4" />
               <p class="text-xs">Github Activity</p>
             </div>
           </div>
           <div class="techstack p-4 h-64 flex-grow border border-border border-r-0">
-            <div class="px-3 z-20 py-2 w-fit gap-1 flex place-items-center rounded-full bg-accent text-accent-foreground">
+            <div class="px-3 z-20 py-2 w-fit gap-2 flex place-items-center rounded-full">
               <Icon name="i-material-symbols:stacks" class="size-4" />
               <p class="text-xs">Tech Stack</p>
             </div>
@@ -73,3 +73,21 @@
 <script setup lang="ts">
 import CompsSkillCard from '../comps/skillCard.vue';
 </script>
+
+<style scoped>
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0 hsl(var(--accent-foreground));
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+</style>

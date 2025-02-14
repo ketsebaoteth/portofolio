@@ -28,13 +28,13 @@
           solutions.
         </p>
         <h1
-          class="main-text text-[70px] place-items-center font-semibold max-w-[700px] leading-[70px] inline-block"
+          class="main-text tracking-tighter text-[70px] place-items-center font-semibold max-w-[620px] leading-[70px] inline-block"
         >
           Building <span class="bg-clip-text text-accent-foreground ">Quality</span>, Line by Line.
         </h1>
   
         <div class="flex">
-          <CompsActionbtn class="letstalk text-nowrap">Lets Talk</CompsActionbtn>
+          <CompsActionbtn class="letstalk text-nowrap bg-gradient-to-b from-[#3b3b3b] to-accent">Let's Connect</CompsActionbtn>
           <div
             class="reactor flex place-items-center justify-center p-2 border-2 border-accent rounded-full"
           >

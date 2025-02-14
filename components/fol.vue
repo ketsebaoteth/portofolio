@@ -35,7 +35,7 @@ function jiggleReactor(element: HTMLElement, mouseX: number, mouseY: number) {
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const factor = 0.3;
+    const factor = 0.2;
     const deltaX = (mouseX - centerX) * factor;
     const deltaY = (mouseY - centerY) * factor;
     const isPressed = element.classList.contains("pressed") ? "" : "";

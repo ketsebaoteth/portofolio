@@ -5,7 +5,7 @@
     <div class="absolute full-cover opacity-0 scale-[0.9] scale-x-[0.95] flex overflow-hidden cover2 top-0 left-0 w-screen h-screen">
       <div v-for="(div, index) in divs" :key="index" class="h-full gop flex-grow bg-accent-foreground" />
       <h1 class="absolute welcome text-nowrap opacity-0 top-1/2 left-1/2 z-50 font-extrabold -translate-x-1/2 -translate-y-1/2 text-foreground text-[90px]">
-        Ketsebaot Gizachew
+        Welcome
       </h1>
     </div>
   </div>
@@ -42,10 +42,11 @@ onMounted(() => {
       delay: fullAnimationDelay,
     })
     .to('.full-cover', {
-      duration: 0.8,
+      duration: 0.5,
       scale: 1,
-      ease: 'back.in(8.5)',
-    });
+      ease: 'power3.inOut(2.5)',
+    }
+  );
   
   gsap.set('.welcome', {
     opacity: 1,

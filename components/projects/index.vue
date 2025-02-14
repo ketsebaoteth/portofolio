@@ -31,8 +31,9 @@
             <Icon :name="item" class="size-5 text-foreground" />
           </CompsBtn>
         </div>
-        <CompsActionbtn class="px-4 ml-auto bg-foreground text-background">
-          Open Cosmos
+        <CompsActionbtn class="px-4 ml-auto flex place-items-center gap-2 bg-gradient-to-b from-[#3b3b3b] to-accent text-accent-foreground">
+          Read More
+          <Icon name="i-tabler:arrow-right" class="size-5" />
         </CompsActionbtn>
         <CompsBtn class="flex place-items-center gap-2 px-2">
           <Icon name="tabler:brand-github" class="size-5" />

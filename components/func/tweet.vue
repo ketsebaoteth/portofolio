@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="tweet text-sm py-2 overflow-y-hidden max-h-24">
-      <p class="text-sm px-2">
+      <p class="text-sm px-2 text-muted-foreground">
         Hey, I just found this awesome library called Inspira UI. It's made by the Vue community for @vuejsand @nuxt_js inspired by Acceternity UI, and has amazing ...
       </p>
      </div>

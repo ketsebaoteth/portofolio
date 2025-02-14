@@ -2,15 +2,9 @@
 <template>
   <div
     ref="loader"
-    class="absolute top-0 px-10 left-0 w-screen h-screen py-8 bg-background flex items-end pointer-events-none"
+    class="absolute top-0 px-10 left-0 w-screen h-screen py-8 bg-background flex items-center justify-center pointer-events-none"
   >
-    <div class="w-full h-full border border-border  pb-0 flex flex-col gap-5 justify-end">
-      <h1
-        ref="typingText"
-        class="text-[20px] font-bold text-foreground"
-      >
-        Loading
-      </h1>
+    <div class="w-full h-full border border-border  pb-0 flex flex-col gap-5 place-items-center justify-center">
       <p
         ref="percentText"
         class="text-[110px] leading-[100px] font-bold text-foreground !font-['Amita']"
