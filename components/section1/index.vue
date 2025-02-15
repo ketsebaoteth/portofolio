@@ -1,16 +1,19 @@
 <template>
   <div class="h-fit text-foreground p-[33px] pb-0 pt-0 w-screen bg-background z-10">
-    <div class="border-x border-border pt-16 flex flex-col gap-8">
-      <div class="border-y border-border flex flex-col gap-4">
+    <div class="border-x border-border pt-48 flex flex-col gap-48">
+
+      <div class="border-y border-border flex flex-col place-items-center gap-8">
+
         <div class="px-3 py-1 w-fit gap-1 flex place-items-center rounded-full bg-gradient-to-b from-[#3b3b3b] to-accent text-accent-foreground">
           <Icon name="i-material-symbols:work" class="size-4" />
           <p class="text-xs">Projects</p>
         </div>
-        <h1 class="text-[50px] max-w-96 leading-[45px]">Milestones in the
+        <h1 class="text-[50px] max-w-[500px] leading-[45px] font-semibold text-center">Milestones in the
           learning journey</h1>
-        <p class=" max-w-[600px] leading-tight text-muted-foreground">
+        <p class=" max-w-[600px] leading-tight text-muted-foreground text-center">
           My works are a reflection of my passion for design and development. I love to create beautiful and functional websites that are easy to use and visually appealing. Here are some of my recent projects.
         </p>
+
       </div>
       
   

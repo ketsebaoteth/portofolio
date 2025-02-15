@@ -1,6 +1,6 @@
 <!-- filepath: /c:/Users/admin/Desktop/Portofolio/components/projects/index.vue -->
 <template>
-  <div ref="projectCard" class="w-full h-[580px] bg-background border-y border-border p-4 py-0 flex">
+  <div ref="projectCard" class="w-full h-[580px] bg-white border-y border-border p-4 py-0 flex">
     <div class="content w-1/2 h-full flex place-items-end justify-start project py-3 border-r border-border">
       <div
         class="openworklink border border-border size-12 reactor flex place-items-center justify-center rounded-full bg-background"
