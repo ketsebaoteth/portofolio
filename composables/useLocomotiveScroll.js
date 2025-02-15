@@ -1,17 +1,19 @@
-// filepath: /c:/Users/admin/Desktop/Portofolio/composables/useLocomotiveScroll.js
-import { ref, onMounted, onUnmounted } from 'vue'
-import LocomotiveScroll from 'locomotive-scroll'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
 export function useLocomotiveScroll() {
   const scrollX = ref(0)
   const scrollY = ref(0)
   let locoScroll = null
-  console
 
-  onMounted(() => {
-    if (typeof window !== 'undefined') { // Check if we're on the client-side
+  onMounted(async () => {
+    if (typeof window !== 'undefined') {
+      await nextTick() // Wait for the DOM to be fully rendered
+
+      // Dynamically import Locomotive Scroll
+      const { default: LocomotiveScroll } = await import('locomotive-scroll');
+
       locoScroll = new LocomotiveScroll({
-        el: document.querySelector('#smooth'), 
+        el: document.querySelector('#smooth'),
         smooth: true,
         // Additional options as needed
       })
