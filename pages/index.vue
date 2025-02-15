@@ -19,6 +19,7 @@ onMounted(() => {
         <Nav />
         <Hero />
       </div>
+      <Fol />
       <Trans />
       <Load />
       <Section1 />
