@@ -26,7 +26,7 @@
           <NuxtLink to="">About</NuxtLink>
         </div>
         <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="">Projects</NuxtLink>
+          <NuxtLink to="work">Projects</NuxtLink>
         </div>
         <div class="reactor px-3 py-2 rounded-md">
           <NuxtLink to="">Contact</NuxtLink>

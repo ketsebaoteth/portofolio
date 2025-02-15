@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-import { Smoothie } from "vue-smoothie";
 import {gsap} from "gsap";
 import {onMounted} from "vue";
 
@@ -16,14 +14,17 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="sticky top-0 opacity-0 -z-50 page scale-[0.95]">
-      <Nav />
-      <Hero />
+    <div v-locomotive id="smooth">
+      <div class="sticky top-0 opacity-0 -z-50 page scale-[0.95]">
+        <Nav />
+        <Hero />
+      </div>
+      <Trans />
+      <Load />
+      <Section1 />
+      <Section2 />
+      <SectionBlog />
+      <Section3 />
+      <Footer />
     </div>
-    <Section1 />
-    <Section2 />
-    <SectionBlog />
-    <Section3 />
-    <Footer />
-    
 </template>
