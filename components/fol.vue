@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { useLocomotiveScroll } from "~/composables/useLocomotiveScroll";
 
 const circle = ref<HTMLDivElement | null>(null);
@@ -119,17 +119,6 @@ function circle_follow_mouse() {
       }
     });
   });
-
-  // On scroll, update circle position using last known mouse position plus scroll offsets.
-  document.addEventListener("scroll", () => {
-    if (!circle.value || !shouldFollow.value) return;
-    requestAnimationFrame(() => {
-      if (circle.value) {
-        circle.value.style.top = (lastMouseY.value + scrollY.value) + "px";
-        circle.value.style.left = (lastMouseX.value + scrollX.value) + "px";
-      }
-    });
-  });
 }
 
 // Initialize event listeners
@@ -145,10 +134,10 @@ watch(activeReactor, (newReactor) => {
     const computedStyle = getComputedStyle(newReactor);
     circle.value.style.transform = "none";
     // Apply Locomotive Scroll offsets to the reactor's position
-    circle.value.style.top = (rect.top + scrollY.value) + "px";
-    circle.value.style.left = (rect.left + scrollX.value) + "px";
-    circle.value.style.width = rect.width + "px";
-    circle.value.style.height = rect.height + "px";
+    circle.value.style.top = (rect.top - 4 + scrollY.value) + "px";
+    circle.value.style.left = (rect.left - 4 + scrollX.value) + "px";
+    circle.value.style.width = rect.width + 8 + "px";
+    circle.value.style.height = rect.height + 8 + "px";
     circle.value.style.borderRadius = computedStyle.borderRadius;
   } else {
     // Reset circle to default
@@ -182,6 +171,25 @@ watch(activeProject, (newProject) => {
     circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
   }
 });
+
+// Update circle position on scroll using computed properties
+const circleTop = computed(() => {
+  return lastMouseY.value + scrollY.value + "px";
+});
+
+const circleLeft = computed(() => {
+  return lastMouseX.value + scrollX.value + "px";
+});
+
+watch([circleTop, circleLeft], () => {
+  if (!circle.value || !shouldFollow.value) return;
+  requestAnimationFrame(() => {
+    if (circle.value) {
+      circle.value.style.top = circleTop.value;
+      circle.value.style.left = circleLeft.value;
+    }
+  });
+});
 </script>
 
 <style scoped>
@@ -193,20 +201,22 @@ watch(activeProject, (newProject) => {
   border-radius: 100%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 9999;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
+  backdrop-filter: invert(1);
   justify-content: center;
   text-align: center; /* Ensure text is centered */
 }
 
 .project-text {
-  color: hsl(var(--foreground));
+  color: #ffffff; /* Default color */
   font-size: 12px;
   text-align: center; /* Ensure text is centered */
+  mix-blend-mode: difference; /* Invert the color based on the background */
 }
 
 .pressed {

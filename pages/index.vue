@@ -22,6 +22,7 @@ onMounted(() => {
     </div>
     <Section1 />
     <Section2 />
+    <SectionBlog />
     <Section3 />
     <Footer />
     

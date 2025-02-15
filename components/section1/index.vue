@@ -1,6 +1,6 @@
 <template>
   <div class="h-fit text-foreground p-[33px] pb-0 pt-0 w-screen bg-background z-10">
-    <div class="border-x border-border pt-8 flex flex-col gap-8">
+    <div class="border-x border-border pt-16 flex flex-col gap-8">
       <div class="border-y border-border flex flex-col gap-4">
         <div class="px-3 py-1 w-fit gap-1 flex place-items-center rounded-full bg-gradient-to-b from-[#3b3b3b] to-accent text-accent-foreground">
           <Icon name="i-material-symbols:work" class="size-4" />

@@ -1,7 +1,7 @@
 <template>
-  <div class="h-[calc(100vh-80px)] px-8 border border-border w-screen flex place-items-end">
-    <div class="w-full h-full border-x border-border flex">
-      <div class="flex flex-col h-fit mt-auto mb-8 gap-2 text-xl border-y border-border">
+  <div  class="h-[calc(100vh-80px)] px-8  border border-border w-screen flex place-items-end">
+    <div class="w-full h-full border-x border-border flex !px-0">
+      <div class="flex flex-col w-full h-fit mt-auto mb-8 gap-2 text-xl border-y border-border">
         <div class="socials flex gap-1 place-items-center">
           <CompsBtn no-border class="quickbtn">
             <Icon name="tabler:brand-x" class="size-5" />
@@ -23,7 +23,7 @@
           </p>
         </div>
   
-        <p class="max-w-[300px] description ml-2 text-[14px] leading-tight">
+        <p  class="max-w-[300px] description ml-2 text-[14px] leading-tight">
           I combine technical expertise and creative vision to build effective web
           solutions.
         </p>
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2 h-full pb-8">
+      <div class="w-full h-full pb-8">
         <div class="w-full border border-t-0 border-border border-r-0 h-full flex place-items-end justify-end">
           <Gemini />
         </div>
@@ -62,7 +62,7 @@ onMounted(() => {
   // Split the text into words and characters.
   const mainTextSplit = new SplitType(".main-text", {
     types: "words, chars",
-    wordClass: "word",
+    wordClass: "word ",
     charClass: "char"
   });
 
