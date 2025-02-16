@@ -1,45 +1,50 @@
 <template>
   <div class="w-full h-20 px-[33px]">
-    <div class="w-full h-full flex border-x border-border place-items-center">
-      <div class="name flex flex-col gap-0 overflow-hidden">
-        <h1 class="font-bold to-left text-xl leading-6 flex text-accent-foreground place-items-center font-['Amita']">Ketsebaot Gizachew</h1>
-        <div class="text-container to-left relative w-96 h-[1.0rem] overflow-hidden">
-          <p
-            class="text-xs absolute top-0 text-nowrap transition-transform duration-500"
-            :class="showTime ? 'translate-y-[-2.0rem]' : ''"
-          >
-          Software Developer / UI UX Designer
-          </p>
-          <p
-            class="text-xs absolute top-[1.6rem] transition-transform duration-500"
-            :class="showTime ? 'translate-y-[-1.6rem]' : ''"
-            v-html="localTimeMessage"
-          ></p>
+    <div class="w-full h-full flex border-x py-4 border-border place-items-center">
+      <div class="flex w-full h-full place-items-center border-y border-border">
+        <div class="name flex flex-col gap-0 overflow-hidden">
+          <h1 class="font-bold to-left text-xl leading-6 flex text-accent-foreground place-items-center font-['Amita']">Ketsebaot Gizachew</h1>
+          <div class="text-container to-left relative w-96 h-[1.0rem] overflow-hidden">
+            <p
+              class="text-xs absolute top-0 text-nowrap transition-transform duration-500"
+              :class="showTime ? 'translate-y-[-2.0rem]' : ''"
+            >
+            Software Developer / UI UX Designer
+            </p>
+            <p
+              class="text-xs absolute top-[1.6rem] transition-transform duration-500"
+              :class="showTime ? 'translate-y-[-1.6rem]' : ''"
+              v-html="localTimeMessage"
+            ></p>
+          </div>
         </div>
+        
+        <div class="links ml-auto h-fit flex place-items-center text-sm  pr-2 ">
+          <div class="reactor px-5 py-2 h-full">
+            <NuxtLink to="work">Projects</NuxtLink>
+          </div>
+          <div class="reactor px-5 py-2 h-full">
+            <NuxtLink to="">Blog</NuxtLink>
+          </div>
+          <div class="reactor px-5 py-2 h-full">
+            <NuxtLink to="">About</NuxtLink>
+          </div>
+          <div class="reactor px-5 py-2 h-full">
+            <NuxtLink to="">Workshop</NuxtLink>
+          </div>
+          
+          <div class="reactor px-5 py-2 h-full">
+            <NuxtLink to="">Connect</NuxtLink>
+          </div>
+          <CompsBtn class="h-full rounded-none px-2" no-border @click="toggleTheme">
+            <Icon name="tabler:sun" />
+          </CompsBtn>
+        </div>
+  
+        
+  
       </div>
       
-      <div class="links ml-auto h-fit flex placitcen gap-2 text-sm">
-        
-        <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="work">Projects</NuxtLink>
-        </div>
-        <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="">Blog</NuxtLink>
-        </div>
-        <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="">About</NuxtLink>
-        </div>
-        <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="">Workshop</NuxtLink>
-        </div>
-        
-        <div class="reactor px-3 py-2 rounded-md">
-          <NuxtLink to="">Connect</NuxtLink>
-        </div>
-      </div>
-      <CompsBtn class="h-fit" no-border @click="toggleTheme">
-        <Icon name="tabler:sun" />
-      </CompsBtn>
     </div>
     
   </div>

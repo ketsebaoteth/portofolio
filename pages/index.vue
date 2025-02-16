@@ -14,6 +14,8 @@ onMounted(() => {
 </script>
 
 <template>
+  <div>
+    <GeminiTab />
     <div v-locomotive id="smooth">
       <div class="sticky top-0 opacity-0 -z-50 page scale-[0.95]">
         <Nav />
@@ -24,9 +26,11 @@ onMounted(() => {
       <Load />
       <Sectionde />
       <Section1 />
+      <Sectionblog />
       <Section2 />
-      <SectionBlog />
       <Section3 />
       <Footer />
     </div>
+  </div>
+    
 </template>

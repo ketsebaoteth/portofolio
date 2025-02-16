@@ -1,4 +1,3 @@
-<!-- filepath: /c:/Users/admin/Desktop/Portofolio/components/fol.vue -->
 <template>
   <div ref="circle" class="circle flex flex-col p-2">
     <span v-if="activeProject" class="project-text font-bold">View Project</span>
@@ -24,27 +23,23 @@ let reactorAnimationFrame: number | null = null;
 const { scrollX, scrollY } = useLocomotiveScroll();
 
 /**
- * Slightly move (jiggle) the reactor toward the mouse position.
+ * Slightly move (jiggle) the reactor and circle toward the mouse position.
  */
 function jiggleReactor(element: HTMLElement, mouseX: number, mouseY: number) {
-  setTimeout(() => {
-    if (!activeReactor.value || activeReactor.value !== element) return;
+  if (!activeReactor.value || activeReactor.value !== element) return;
+  element.style.transition = "transform 0.2s cubic-bezier(.31,.58,.6,.93)"; // Disable transition for immediate response
+  const rect = element.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const factor = 0.1; // Reduced factor for smoother jiggle
+  const deltaX = (mouseX - centerX) * factor;
+  const deltaY = (mouseY - centerY) * factor;
 
-    element.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const factor = 0.2;
-    const deltaX = (mouseX - centerX) * factor;
-    const deltaY = (mouseY - centerY) * factor;
-    const isPressed = element.classList.contains("pressed") ? "" : "";
-
-    element.style.transform = `translate(${deltaX}px, ${deltaY}px)${isPressed}`;
-    if (circle.value) {
-      circle.value.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    }
-  }, 100);
+  // Apply translation to both the reactor and the circle
+  element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+  if (circle.value) {
+    circle.value.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+  }
 }
 
 /**
@@ -54,8 +49,6 @@ function onReactorMouseMove(e: MouseEvent) {
   if (!activeReactor.value) return;
   if (reactorAnimationFrame) cancelAnimationFrame(reactorAnimationFrame);
   reactorAnimationFrame = requestAnimationFrame(() => {
-    // Use pageX/pageY so scrolling is accounted for,
-    // then add Locomotive's scroll offset.
     jiggleReactor(
       activeReactor.value as HTMLElement,
       e.pageX,
@@ -82,7 +75,10 @@ function circle_follow_mouse() {
         shouldFollow.value = true;
       }
       element.removeEventListener("mousemove", onReactorMouseMove);
-      element.style.transform = "";
+      element.style.transform = ""; // Reset transform on mouse leave
+      if (circle.value) {
+        circle.value.style.transform = "translate(-50%, -50%)"; // Reset circle position
+      }
     });
 
     // Pressed effect
@@ -106,11 +102,12 @@ function circle_follow_mouse() {
     });
   });
 
-  // Track mousemove outside reactors:
+  // Track mousemove anywhere on the page:
   document.addEventListener("mousemove", (e) => {
     lastMouseX.value = e.pageX;
     lastMouseY.value = e.pageY;
     if (!circle.value || !shouldFollow.value) return;
+
     requestAnimationFrame(() => {
       if (circle.value) {
         // Add Locomotive Scroll offsets to the mouse coordinates
@@ -121,6 +118,27 @@ function circle_follow_mouse() {
   });
 }
 
+// Debounce function to limit the frequency of updates
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+// Debounce the update of the circle's position
+const updateCirclePosition = debounce(() => {
+  if (!circle.value || !activeReactor.value) return;
+  const rect = activeReactor.value.getBoundingClientRect();
+  const computedStyle = getComputedStyle(activeReactor.value);
+  circle.value.style.top = (rect.top  + scrollY.value) + "px";
+  circle.value.style.left = (rect.left  + scrollX.value) + "px";
+  circle.value.style.width = rect.width  + "px";
+  circle.value.style.height = rect.height  + "px";
+  circle.value.style.borderRadius = computedStyle.borderRadius;
+}, 20); // Adjust the debounce wait time as needed
+
 // Initialize event listeners
 onMounted(() => {
   circle_follow_mouse();
@@ -130,22 +148,13 @@ onMounted(() => {
 watch(activeReactor, (newReactor) => {
   if (!circle.value) return;
   if (newReactor) {
-    const rect = newReactor.getBoundingClientRect();
-    const computedStyle = getComputedStyle(newReactor);
-    circle.value.style.transform = "none";
-    // Apply Locomotive Scroll offsets to the reactor's position
-    circle.value.style.top = (rect.top - 4 + scrollY.value) + "px";
-    circle.value.style.left = (rect.left - 4 + scrollX.value) + "px";
-    circle.value.style.width = rect.width + 8 + "px";
-    circle.value.style.height = rect.height + 8 + "px";
-    circle.value.style.borderRadius = computedStyle.borderRadius;
+    updateCirclePosition();
   } else {
     // Reset circle to default
     circle.value.style.transform = "translate(-50%, -50%)";
     circle.value.style.width = "40px";
     circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
-    circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
   }
 });
 
@@ -157,7 +166,6 @@ watch(activeProject, (newProject) => {
     circle.value.style.width = "80px";
     circle.value.style.height = "80px";
     circle.value.style.borderRadius = "50%"; // Keep it round
-    circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
     // The circle should still follow the mouse
     circle.value.style.top = (lastMouseY.value + scrollY.value) + "px";
@@ -168,7 +176,6 @@ watch(activeProject, (newProject) => {
     circle.value.style.width = "40px";
     circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
-    circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
   }
 });
 
@@ -201,7 +208,7 @@ watch([circleTop, circleLeft], () => {
   border-radius: 100%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.2s ease-out; /* smoother transition for reduced jitter */
   z-index: 9999;
   top: 0;
   left: 0;
@@ -213,13 +220,18 @@ watch([circleTop, circleLeft], () => {
 }
 
 .project-text {
-  color: #ffffff; /* Default color */
+  color: #ffffff;
   font-size: 12px;
-  text-align: center; /* Ensure text is centered */
-  mix-blend-mode: difference; /* Invert the color based on the background */
+  text-align: center;
+  mix-blend-mode: difference;
 }
 
 .pressed {
-  scale: 1.1;
+  /* Only scale the reactor a bit when pressed, but no translation. */
+  /*
+     If you want a bigger effect, do:
+     transform: scale(1.05) !important;
+     transition: 0.2s ease-in-out;
+   */
 }
 </style>

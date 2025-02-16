@@ -1,6 +1,6 @@
 <template>
   <div class="h-[50vh] w-full px-[33px]">
-    <div class="cont w-full h-full flex gap-4 flex-col place-items-center justify-center border-x border-border ">
+    <div class="cont w-full h-full flex gap-4 flex-col place-items-center justify-center border-x border-b border-border ">
       <h1 class="text-[50px] leading-tight font-['Amita'] font-bold">
         Let's work together
       </h1>

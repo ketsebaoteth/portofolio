@@ -1,5 +1,3 @@
-import { ref } from "vue";
+import { ref } from 'vue';
 
-export const state = ref({
-  geminiTab: false,
-})
+export const geminiTab = ref(false);

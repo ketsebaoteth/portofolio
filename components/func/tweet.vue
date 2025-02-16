@@ -8,9 +8,7 @@
         <p class="text-sm font-semibold">Ketsebaot Gizachew</p>
         <p class="text-xs">@KetsaBytes</p>
       </div>
-      <div class="follow ml-auto px-3 py-2">
-        <p class="text-sm">Follow</p>
-      </div>
+      
     </div>
     <div class="tweet text-sm py-2 overflow-y-hidden max-h-24">
       <p class="text-sm px-2 text-muted-foreground">
