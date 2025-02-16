@@ -22,6 +22,7 @@ onMounted(() => {
       <Fol />
       <Trans />
       <Load />
+      <Sectionde />
       <Section1 />
       <Section2 />
       <SectionBlog />

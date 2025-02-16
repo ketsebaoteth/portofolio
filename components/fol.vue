@@ -142,8 +142,8 @@ watch(activeReactor, (newReactor) => {
   } else {
     // Reset circle to default
     circle.value.style.transform = "translate(-50%, -50%)";
-    circle.value.style.width = "20px";
-    circle.value.style.height = "20px";
+    circle.value.style.width = "40px";
+    circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
     circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
   }
@@ -165,8 +165,8 @@ watch(activeProject, (newProject) => {
   } else {
     // Reset circle to default
     circle.value.style.transform = "translate(-50%, -50%)";
-    circle.value.style.width = "20px";
-    circle.value.style.height = "20px";
+    circle.value.style.width = "40px";
+    circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
     circle.value.style.transition = "0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
   }
@@ -195,8 +195,8 @@ watch([circleTop, circleLeft], () => {
 <style scoped>
 .circle {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background-color: #52525230;
   border-radius: 100%;
   pointer-events: none;

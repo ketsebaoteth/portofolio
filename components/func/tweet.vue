@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col gap-2">
+  <div class="w-full h-full flex flex-col justify-around">
     <div class="flex gap-2">
       <div >
         <img src="../../assets/pfpnew.jpg" class="size-10 rounded-full" alt="">
@@ -21,6 +21,7 @@
       <Icon name="i-tabler:share-3" class="scale-x-[-1]" />
       <Icon name="i-garden:arrow-retweet-fill-12" />
       <Icon name="i-tabler:heart" />
+      <Icon name="i-tabler:brand-x" class="ml-auto" />
      </div>
   </div>
 </template>

@@ -4,8 +4,8 @@
       
       <div class="bento w-full flex flex-col gap-4 h-screen py-8">
         <div class="flex gap-4">
-          <div class="location&socials relative p-4 h-80 min-w-[450px] flex-grow border border-border border-l-0">
-            <img src="../../assets/loc.png" class="absolute z-0 top-0 left-0 w-full h-full" alt="">
+
+          <div class="location&socials bg-white relative p-4 h-80 min-w-[450px] flex-grow border border-border border-l-0">
             <div class="pulse absolute top-1/2 left-1/2 opacity-50 -translate-x-1/2 -translate-y-1/2 size-16 bg-accent-foreground rounded-full">
 
             </div>
@@ -14,22 +14,25 @@
               <p class="text-xs">Location</p>
             </div>
           </div>
-          <div class="latestTweetblogs flex flex-col h-80 flex-grow gap-4">
-            <div class="thexweet p-4 w-full flex flex-col gap-4 flex-grow border border-border">
-              <Icon name="i-tabler:brand-x" class="size-7" />
+
+
+          <div class="latestTweetblogs  flex flex-col h-80 flex-grow gap-4">
+            <div class="thexweet bg-white p-4 w-full flex flex-col gap-4 flex-grow border border-border">
               <FuncTweet />
             </div>
             
-            <div class="readblog flex place-items-center reactor mt-auto w-full py-4 border border-border px-4 box-border">
+            <div class="readblog bg-white flex place-items-center mt-auto w-full py-4 border border-border px-4 box-border">
               Read Latest Blog's
               <Icon name="i-tabler:arrow-right" class="size-6 ml-auto" />
             </div>
           </div>
-          <div class="lastplayedonspotify relative min-w-[450px] flex flex-col gap-4 wpm h-80 flex-grow">
-            <div class="spotify w-full py-4 border border-r-0 border-border">
+
+
+          <div class="lastplayedonspotify  relative min-w-[450px] flex flex-col gap-4 wpm h-80 flex-grow">
+            <div class="spotify bg-white w-full py-4 border border-r-0 border-border">
               <FuncSpot />
             </div>
-            <div class="type relative p-4 w-full flex flex-col flex-grow border border-r-0 border-border">
+            <div class="type bg-white relative p-4 w-full flex flex-col flex-grow border border-r-0 border-border">
               <div class="z-20 py-2 w-fit gap-1 flex place-items-center rounded-full">
                 <Icon name="i-simple-icons:monkeytype" class="size-6" />
                 <p class="text-xs">Typing Speed</p>
@@ -51,13 +54,13 @@
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="githubcontrib p-4 h-64 flex-grow border border-border border-l-0">
+          <div class="githubcontrib bg-white p-4 h-64 flex-grow border border-border border-l-0">
             <div class="px-3 z-20 py-2 w-fit gap-2 flex place-items-center rounded-full">
               <Icon name="tabler:brand-github" class="size-4" />
               <p class="text-xs">Github Activity</p>
             </div>
           </div>
-          <div class="techstack p-4 h-64 flex-grow border border-border border-r-0">
+          <div class="techstack bg-white p-4 h-64 flex-grow border border-border border-r-0">
             <div class="px-3 z-20 py-2 w-fit gap-2 flex place-items-center rounded-full">
               <Icon name="i-material-symbols:stacks" class="size-4" />
               <p class="text-xs">Tech Stack</p>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-[50vh] flex px-[33px]">
-    <div class="w-full flex flex-col h-full border-x border-border border-t pt-8 ">
+    <div class="w-full flex flex-col h-full bg-primary border-x border-border border-t pt-8 ">
       <div class="flex">
         <div class="secion1 h-full flex flex-col gap-8">
           <span class="font-['Amita'] text-lg"> Ketsebaot Gizachew </span>

@@ -1,44 +1,40 @@
 <!-- filepath: /c:/Users/admin/Desktop/Portofolio/components/projects/index.vue -->
 <template>
   <div ref="projectCard" class="w-full h-[580px] bg-white border-y border-border p-4 py-0 flex">
-    <div class="content w-1/2 h-full flex place-items-end justify-start project py-3 border-r border-border">
+    <div class="content w-[60%] h-full flex place-items-end justify-start project py-3 border-r border-border">
       <div
         class="openworklink border border-border size-12 reactor flex place-items-center justify-center rounded-full bg-background"
       >
         <Icon name="tabler:arrow-up-right" class="text-foreground size-6" />
       </div>
     </div>
-    <div class="details w-1/2 flex flex-col p-8 py-8 gap-4 text-foreground">
-      <div class="daterange flex place-items-center gap-2">
-        <div class="reddote size-2 bg-accent-foreground rounded-full"></div>
-        {{ props.date }}
+
+    <div class="details border-l border-muted w-[40%] flex flex-col p-8 pr-4 py-8 gap-4 text-foreground">
+      <div class="nav flex">
+        <div class="daterange text-sm flex place-items-center gap-2">
+          {{ props.date }}
+        </div>
+        <CompsBtn class="flex place-items-center ml-auto gap-2 px-2">
+          <Icon name="tabler:brand-github" class="size-5" />
+        </CompsBtn>
       </div>
+      
       <h1 class="text-3xl font-semibold">{{ props.title }}</h1>
       <p class="text-sm text-muted-foreground">
         <slot />
       </p>
-      <div class="flex gap-1">
-        <div v-for="tag in props.tags" :key="tag" class="flex gap-2">
-          <CompsBtn no-border class="bg-muted py-2 px-3">
-            <p class="text-xs">{{ tag }}</p>
-          </CompsBtn>
+      
+      <div class="flex gap-1 flex-wrap">
+        <div v-for="tag in props.tags" class="text-accent-foreground px-1">
+          <p class="text-xs"># {{ tag }}</p>
         </div>
       </div>
-
-      <div class="flex gap-3 mt-auto">
-        <div class="flex gap-2">
-          <CompsBtn no-border v-for="item in props.stack" :key="item" class="flex gap-2">
-            <Icon :name="item" class="size-5 text-foreground" />
-          </CompsBtn>
-        </div>
-        <CompsActionbtn class="px-4 ml-auto flex place-items-center gap-2 bg-gradient-to-b from-[#3b3b3b] to-accent text-accent-foreground">
-          Read More
-          <Icon name="i-tabler:arrow-right" class="size-5" />
-        </CompsActionbtn>
-        <CompsBtn class="flex place-items-center gap-2 px-2">
-          <Icon name="tabler:brand-github" class="size-5" />
-        </CompsBtn>
-      </div>
+        
+      <CompsActionbtn class="px-4 mt-auto w-full flex py-3 place-items-center justify-center gap-2 bg-gradient-to-b from-[#3b3b3b] to-accent text-accent-foreground">
+        Read More
+        <Icon name="i-tabler:arrow-right" class="size-5" />
+      </CompsActionbtn>
+      
     </div>
   </div>
 </template>

@@ -19,14 +19,14 @@
     --border: 0, 0%, 100%;
     --input: 214.3 31.8% 91.4%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 0, 0%, 100%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --accent: 190, 19%, 6%;
-    --accent-foreground: 41, 92%, 52%;
+    --accent-foreground: 12, 97%, 59%;
     --accent-foreground-dark: 41, 97%, 45%;
 
     --destructive: 0 84.2% 60.2%;
