@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch, computed } from "vue";
 import { useLocomotiveScroll } from "~/composables/useLocomotiveScroll";
 
+// ...existing code...
 const circle = ref<HTMLDivElement | null>(null);
 const activeReactor = ref<HTMLElement | null>(null);
 const activeProject = ref<HTMLElement | null>(null);
@@ -17,14 +18,19 @@ const shouldFollow = ref(true);
 const lastMouseX = ref(0);
 const lastMouseY = ref(0);
 
+// New: internal target and current positions for smooth interpolation
+const targetX = ref(0);
+const targetY = ref(0);
+const currentX = ref(0);
+const currentY = ref(0);
+let animationId: number | null = null;
+
 let reactorAnimationFrame: number | null = null;
 
 // Get scroll offsets from Locomotive Scroll
 const { scrollX, scrollY } = useLocomotiveScroll();
 
-/**
- * Slightly move (jiggle) the reactor and circle toward the mouse position.
- */
+// ...existing code...
 function jiggleReactor(element: HTMLElement, mouseX: number, mouseY: number) {
   if (!activeReactor.value || activeReactor.value !== element) return;
   element.style.transition = "transform 0.2s cubic-bezier(.31,.58,.6,.93)"; // Disable transition for immediate response
@@ -38,13 +44,12 @@ function jiggleReactor(element: HTMLElement, mouseX: number, mouseY: number) {
   // Apply translation to both the reactor and the circle
   element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
   if (circle.value) {
-    circle.value.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    // Keep centering translate plus jiggle offset for smooth combination
+    circle.value.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px)`;
   }
 }
 
-/**
- * Handler for mousemove over an active reactor.
- */
+// ...existing code...
 function onReactorMouseMove(e: MouseEvent) {
   if (!activeReactor.value) return;
   if (reactorAnimationFrame) cancelAnimationFrame(reactorAnimationFrame);
@@ -57,9 +62,7 @@ function onReactorMouseMove(e: MouseEvent) {
   });
 }
 
-/**
- * Attach event listeners to each .reactor and track mouse & scroll.
- */
+// ...existing code...
 function circle_follow_mouse() {
   const reactors = document.querySelectorAll(".reactor");
   reactors.forEach((element: HTMLElement) => {
@@ -77,7 +80,7 @@ function circle_follow_mouse() {
       element.removeEventListener("mousemove", onReactorMouseMove);
       element.style.transform = ""; // Reset transform on mouse leave
       if (circle.value) {
-        circle.value.style.transform = "translate(-50%, -50%)"; // Reset circle position
+        circle.value.style.transform = "translate(-50%, -50%)"; // Reset circle transform
       }
     });
 
@@ -106,55 +109,105 @@ function circle_follow_mouse() {
   document.addEventListener("mousemove", (e) => {
     lastMouseX.value = e.pageX;
     lastMouseY.value = e.pageY;
-    if (!circle.value || !shouldFollow.value) return;
 
-    requestAnimationFrame(() => {
-      if (circle.value) {
-        // Add Locomotive Scroll offsets to the mouse coordinates
-        circle.value.style.top = (e.pageY + scrollY.value) + "px";
-        circle.value.style.left = (e.pageX + scrollX.value) + "px";
-      }
-    });
+    // Instead of jumping the circle, update the target position.
+    if (shouldFollow.value) {
+      targetX.value = e.pageX + scrollX.value;
+      targetY.value = e.pageY + scrollY.value;
+    }
   });
 }
 
 // Debounce function to limit the frequency of updates
-function debounce(func, wait) {
-  let timeout;
-  return function(...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
+function debounce(func: (...args: any[]) => void, wait: number) {
+  let timeout: number | undefined;
+  return function(this: any, ...args: any[]) {
+    if (timeout) window.clearTimeout(timeout);
+    timeout = window.setTimeout(() => func.apply(this, args), wait) as unknown as number;
   };
 }
 
-// Debounce the update of the circle's position
+// ...existing code...
 const updateCirclePosition = debounce(() => {
   if (!circle.value || !activeReactor.value) return;
   const rect = activeReactor.value.getBoundingClientRect();
   const computedStyle = getComputedStyle(activeReactor.value);
-  circle.value.style.top = (rect.top  + scrollY.value) + "px";
-  circle.value.style.left = (rect.left  + scrollX.value) + "px";
-  circle.value.style.width = rect.width  + "px";
-  circle.value.style.height = rect.height  + "px";
+
+  // Set visual size immediately (so circle expands/shrinks smoothly via CSS transition).
+  circle.value.style.width = rect.width + "px";
+  circle.value.style.height = rect.height + "px";
   circle.value.style.borderRadius = computedStyle.borderRadius;
+
+  // Target the CENTER of the reactor (circle has translate -50% to center)
+  targetX.value = rect.left + rect.width / 2 + scrollX.value;
+  targetY.value = rect.top + rect.height / 2 + scrollY.value;
 }, 20); // Adjust the debounce wait time as needed
+// ...existing code...
+
+// Smooth animation loop: lerp current toward target
+function startAnimation() {
+  const ease = 0.15; // lower = slower follow, adjust to taste
+  function step() {
+    if (!circle.value) {
+      animationId = requestAnimationFrame(step);
+      return;
+    }
+
+    // Initialize current to target if first frame
+    if (!currentX.value && !currentY.value) {
+      currentX.value = targetX.value || (lastMouseX.value + scrollX.value);
+      currentY.value = targetY.value || (lastMouseY.value + scrollY.value);
+    }
+
+    // Lerp towards target
+    currentX.value += (targetX.value - currentX.value) * ease;
+    currentY.value += (targetY.value - currentY.value) * ease;
+
+    circle.value.style.left = currentX.value + "px";
+    circle.value.style.top = currentY.value + "px";
+
+    animationId = requestAnimationFrame(step);
+  }
+  if (animationId == null) animationId = requestAnimationFrame(step);
+}
+
+function stopAnimation() {
+  if (animationId != null) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+}
 
 // Initialize event listeners
 onMounted(() => {
   circle_follow_mouse();
+  // initialize target to last mouse + scroll to avoid initial jump
+  targetX.value = lastMouseX.value + scrollX.value;
+  targetY.value = lastMouseY.value + scrollY.value;
+  startAnimation();
 });
 
-// Watch active reactor to position the circle over it
+onBeforeUnmount(() => {
+  stopAnimation();
+  if (reactorAnimationFrame) cancelAnimationFrame(reactorAnimationFrame);
+});
+
+// Watch active reactor to set target and sizes
 watch(activeReactor, (newReactor) => {
   if (!circle.value) return;
   if (newReactor) {
     updateCirclePosition();
   } else {
-    // Reset circle to default
-    circle.value.style.transform = "translate(-50%, -50%)";
+    // Reset circle to default size and target (mouse)
     circle.value.style.width = "40px";
     circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
+    // Re-target to current mouse position
+    targetX.value = lastMouseX.value + scrollX.value;
+    targetY.value = lastMouseY.value + scrollY.value;
+
+    // Reset transform so we don't keep jiggle offsets
+    circle.value.style.transform = "translate(-50%, -50%)";
   }
 });
 
@@ -167,12 +220,11 @@ watch(activeProject, (newProject) => {
     circle.value.style.height = "80px";
     circle.value.style.borderRadius = "50%"; // Keep it round
 
-    // The circle should still follow the mouse
-    circle.value.style.top = (lastMouseY.value + scrollY.value) + "px";
-    circle.value.style.left = (lastMouseX.value + scrollX.value) + "px";
+    // Target the mouse while over project
+    targetX.value = lastMouseX.value + scrollX.value;
+    targetY.value = lastMouseY.value + scrollY.value;
   } else {
     // Reset circle to default
-    circle.value.style.transform = "translate(-50%, -50%)";
     circle.value.style.width = "40px";
     circle.value.style.height = "40px";
     circle.value.style.borderRadius = "100%";
@@ -189,14 +241,13 @@ const circleLeft = computed(() => {
 });
 
 watch([circleTop, circleLeft], () => {
-  if (!circle.value || !shouldFollow.value) return;
-  requestAnimationFrame(() => {
-    if (circle.value) {
-      circle.value.style.top = circleTop.value;
-      circle.value.style.left = circleLeft.value;
-    }
-  });
+  // On scroll, update target instead of jumping
+  if (!shouldFollow.value) return;
+  targetX.value = lastMouseX.value + scrollX.value;
+  targetY.value = lastMouseY.value + scrollY.value;
 });
+
+// ...existing code...
 </script>
 
 <style scoped>
@@ -208,7 +259,7 @@ watch([circleTop, circleLeft], () => {
   border-radius: 100%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: 0.2s ease-out; /* smoother transition for reduced jitter */
+  transition: 0.5s cubic-bezier(0, 0.57, 0.2, 1); /* smoother transition for reduced jitter */
   z-index: 9999;
   top: 0;
   left: 0;

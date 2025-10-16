@@ -30,7 +30,7 @@
         <h1
           class="main-text tracking-tighter text-[70px] place-items-center font-semibold max-w-[620px] leading-[70px] inline-block"
         >
-          Building <span class="bg-clip-text text-accent-foreground ">Quality</span>, Line by Line.
+          Building <span class="bg-clip-text text-[#e20622] ">Quality</span>, Line by Line.
         </h1>
   
         <div class="flex">
@@ -42,9 +42,15 @@
           </div>
         </div>
       </div>
-      <div class="w-full h-full pb-8">
-        <div class="w-full border border-t-0 border-border border-r-0 h-full flex place-items-end justify-end">
+      <div class="w-full h-full pb-8 ">
+        <Galaxy />
+        <div class="w-full border border-t-0 border-border border-r-0 h-full flex place-items-center justify-center">
+          <Holderhand x="-50" y="220" />
+          <Eye />
+          <div class="absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
           <Gemini />
+          </div>
+
         </div>
       </div>
       

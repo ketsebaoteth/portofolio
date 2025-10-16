@@ -3,7 +3,7 @@
     <div class="w-full h-full flex border-x py-4 border-border place-items-center">
       <div class="flex w-full h-full place-items-center border-y border-border">
         <div class="name flex flex-col gap-0 overflow-hidden">
-          <h1 class="font-bold to-left text-xl leading-6 flex text-accent-foreground place-items-center font-['Amita']">Ketsebaot Gizachew</h1>
+          <h1 class="font-bold to-left text-xl leading-6 flex text-[#e20622] place-items-center font-['Amita']">Ketsebaot Gizachew</h1>
           <div class="text-container to-left relative w-96 h-[1.0rem] overflow-hidden">
             <p
               class="text-xs absolute top-0 text-nowrap transition-transform duration-500"
