@@ -53,6 +53,7 @@ module.exports = {
       },
       fontFamily: {
         Neue: ['"NeueHaasGrotesk"', "sans-serif"],
+        shamgod: ['"shamgod"', "sans-serif"],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

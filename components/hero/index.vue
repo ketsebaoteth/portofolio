@@ -1,7 +1,7 @@
 <template>
   <div  class="h-[calc(100vh-80px)] px-8  border border-border w-screen flex place-items-end">
     <div class="w-full h-full border-x border-border flex !px-0">
-      <div class="flex flex-col w-full h-fit mt-auto mb-8 gap-2 text-xl border-y border-border">
+      <div class="flex flex-col w-full h-fit mt-auto mb-auto mb-8 gap-1 text-xl border-y border-border">
         <div class="socials flex gap-1 place-items-center">
           <CompsBtn no-border class="quickbtn">
             <Icon name="tabler:brand-x" class="size-5" />
@@ -23,18 +23,17 @@
           </p>
         </div>
   
-        <p  class="max-w-[300px] description ml-2 text-[14px] leading-tight">
-          I combine technical expertise and creative vision to build effective web
-          solutions.
+        <p  class="max-w-[360px] description ml-2 mt-5 text-[16px] leading-tight">
+          <span class="text-[24px]">👋</span> It's K, Your product design partner!
         </p>
         <h1
-          class="main-text tracking-tighter text-[70px] place-items-center font-semibold max-w-[620px] leading-[70px] inline-block"
+          class="main-text tracking-tighter text-[110px] mb-5  place-items-center font-semibold max-w-[1000px] leading-[110px] inline-block"
         >
           Building <span class="bg-clip-text text-[#e20622] ">Quality</span>, Line by Line.
         </h1>
   
         <div class="flex">
-          <CompsActionbtn class="letstalk text-nowrap bg-gradient-to-b from-[#3b3b3b] to-accent">Let's Connect</CompsActionbtn>
+          <CompsActionbtn class="letstalk text-nowrap bg-gradient-to-b from-[#3b3b3b] to-accent">Let's Talk</CompsActionbtn>
           <div
             class="reactor flex place-items-center justify-center p-2 border-2 border-accent rounded-full"
           >

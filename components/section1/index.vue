@@ -17,7 +17,7 @@
       </div>
       
   
-      <div class="cont w-full h-full flex flex-col place-items-center gap-52">
+      <div class="cont w-full h-full flex flex-col place-items-center gap-20">
         <Projects :tags="['PWA','Web','Graphics','Editing']" title="Cosmos Editor" :stack="['tabler:brand-nuxt','tabler:brand-vue', 'tabler:brand-typescript','i-simple-icons:rust','i-file-icons:webassembly']" >
           An editor to imagine your ideas without leaving the browser. Enables the artistic community to create with freedom and hands designers powerfull tools to show there power. Cosmos marks a new begining of opensource design.
           <p class="mt-5">

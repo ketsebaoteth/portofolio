@@ -1,7 +1,7 @@
 <!-- filepath: /c:/Users/admin/Desktop/Portofolio/components/projects/index.vue -->
 <template>
-  <div ref="projectCard" class="w-full h-[580px] bg-white border-y border-border p-4 py-0 flex">
-    <div class="content w-[60%] h-full flex place-items-end justify-start project py-3 border-r border-border">
+  <div ref="projectCard" class="w-full h-[78vh] bg-white border-y border-border p-4 py-0 flex">
+    <div class="content w-full h-full bg-gray-300 flex place-items-end justify-start project p-3 border-r border-border">
       <div
         class="openworklink border border-border size-12 reactor flex place-items-center justify-center rounded-full bg-background"
       >
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="details border-l border-muted w-[40%] flex flex-col p-8 pr-4 py-8 gap-4 text-foreground">
+    <!-- <div class="details border-l border-muted w-[40%] flex flex-col p-8 pr-4 py-8 gap-4 text-foreground">
       <div class="nav flex">
         <div class="daterange text-sm flex place-items-center gap-2">
           {{ props.date }}
@@ -35,7 +35,7 @@
         <Icon name="i-tabler:arrow-right" class="size-5" />
       </CompsActionbtn>
       
-    </div>
+    </div> -->
   </div>
 </template>
 
